@@ -4,7 +4,7 @@ from django_countries.fields import CountryField
 
 class AbstractItem(core_models.TimeStampedModel):
 
-    """" Abstract Item """
+    """ Abstract Item """
 
     name = models.CharField(max_length=80)
 
@@ -19,6 +19,8 @@ class AbstractItem(core_models.TimeStampedModel):
 class RoomType(AbstractItem):
 
     """ Room Type Model Definition """
+
+    subtitle = models.CharField(max_length=140, null=True)
 
     class Meta:
         verbose_name = "Room Type"
