@@ -17,8 +17,8 @@ class Message(core_models.TimeStampedModel):
     """ Message Model definition """
 
     message = models.TextField();
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    conversation = models.ForeignKey("Conversation", on_delete=models.CASCADE)
+    user = models.ForeignKey("users.User", related_name="messages", on_delete=models.CASCADE)
+    conversation = models.ForeignKey("Conversation", related_name="messages", on_delete=models.CASCADE)
     send_date = models.DateField()  #Added
     send_time = models.TimeField()  #Added
 
