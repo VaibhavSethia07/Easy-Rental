@@ -25,3 +25,7 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
+
+    list_display = UserAdmin.list_display + ("superhost",)
+
+    list_filter = UserAdmin.list_filter + ("superhost",)
