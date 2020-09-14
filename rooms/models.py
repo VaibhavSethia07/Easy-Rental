@@ -1,6 +1,7 @@
 from django.db import models
 from core import models as core_models
 from django_countries.fields import CountryField
+from functools import reduce
 
 class AbstractItem(core_models.TimeStampedModel):
 
@@ -50,7 +51,7 @@ class Photo(core_models.TimeStampedModel):
 
     """ Photo Model Definition """
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    file = models.ImageField(upload_to = "room_photos")
     room = models.ForeignKey("Room",related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -88,7 +89,9 @@ class Room(core_models.TimeStampedModel):
 
     def total_rating(self):
         all_reviews = self.reviews.all()
-        all_ratings = []
+        all_ratings = 0
+        
         for review in all_reviews:
-            all_ratings.append(review.rating_average)
-        return 0
+            all_ratings += review.rating_average()
+            
+        return all_ratings/len(all_reviews)
