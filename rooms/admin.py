@@ -13,12 +13,18 @@ class ItemAdmin(admin.ModelAdmin):
         return obj.rooms.count()
     used_by.short_description = "Used By"
 
+class PhotoInline(admin.TabularInline):
+    model = models.Photo
 
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
 
+    raw_id_fields = ("host",)
+
+    inlines = (PhotoInline,)
+    
     fieldsets = (
         (
             "Basic Info", {
