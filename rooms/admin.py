@@ -24,12 +24,13 @@ class RoomAdmin(admin.ModelAdmin):
     raw_id_fields = ("host",)
 
     inlines = (PhotoInline,)
+
     
     fieldsets = (
         (
             "Basic Info", {
                 "fields": (
-                    "name", "description", "country", "address", "price",
+                    "name", "description", "country","city", "address", "price",
                 )
             }
         ),

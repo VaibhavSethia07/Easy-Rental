@@ -82,10 +82,16 @@ class Room(core_models.TimeStampedModel):
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
-    
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        city_parts = self.city.split()
+        for part in range(len(city_parts)):
+            city_parts[part] = str.capitalize(city_parts[part])
+        self.city = " ".join(city_parts)
+        super().save(*args, **kwargs)
 
     def total_rating(self):
         all_reviews = self.reviews.all()
