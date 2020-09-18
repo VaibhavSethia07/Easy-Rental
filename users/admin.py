@@ -26,6 +26,6 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
-    list_display = UserAdmin.list_display + ("superhost",)
+    list_display = ("username", "first_name","last_name","is_active", "email", "language","currency", "superhost", "is_staff","is_superuser",)
 
-    list_filter = UserAdmin.list_filter + ("superhost",)
+    list_filter = UserAdmin.list_filter+ ("superhost",)
