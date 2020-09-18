@@ -5,13 +5,15 @@ from django_seed import Seed
 from rooms import models as room_models
 from users import models as user_models
 
+NAME = "rooms"
+
 class Command(BaseCommand):
 
-    help = "This command create rooms."
+    help = "This command create {NAME}."
 
     def add_arguments(self, parser):
 
-        parser.add_argument("--number",default=1, type=int, help="How many users you want to create?")
+        parser.add_argument("--number",default=1, type=int, help="How many {NAME} you want to create?")
         
     def handle(self, *args, **options):
         
@@ -38,7 +40,7 @@ class Command(BaseCommand):
                 room_models.Photo.objects.create(
                     caption = seeder.faker.sentence(),
                     room = room,
-                    file = f"room_photos/{random.randint(1,31)}.jpeg",
+                    file = f"room_photos/{random.randint(1,31)}.webp",
                     
                 )
 
@@ -61,5 +63,5 @@ class Command(BaseCommand):
                 if (magic_number % 2 == 0):
                     room.house_rules.add(house_rule)
 
-        self.stdout.write(self.style.SUCCESS(f"{number} rooms created"))
+        self.stdout.write(self.style.SUCCESS(f"{number} {NAME} created"))
     
