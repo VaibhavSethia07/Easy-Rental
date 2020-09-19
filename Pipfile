@@ -10,6 +10,8 @@ flake8 = "*"
 django = "==2.2.5"
 pillow = "*"
 django-countries = "*"
+django-seed = "*"
+faker = "*"
 
 [requires]
 python_version = "3.7"

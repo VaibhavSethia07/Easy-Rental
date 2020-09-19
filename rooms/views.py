@@ -1,5 +1,15 @@
+from datetime import datetime
 from django.shortcuts import render
+from . import models
 
 def all_rooms(request):
-
-    pass
+    
+    rooms = models.Room.objects.all()
+    return render(request, "rooms/home.html", {
+        "room": rooms
+    })
+    
+    
+    
+    
+    
