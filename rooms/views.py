@@ -1,20 +1,50 @@
-from math import ceil
-from datetime import datetime
-from django.shortcuts import render, redirect
-from django.core.paginator import Paginator, EmptyPage
+
+
+
+from django.views.generic.list import ListView
 from . import models
 
-def all_rooms(request):
-    page = request.GET.get("page",1)
-    room_list = models.Room.objects.all()
-    paginator = Paginator(room_list, 10,orphans=5)
+class HomeView(ListView):
 
-    try:
-        rooms = paginator.page(int(page))
-        return render(request, "rooms/home.html", { "page": rooms,})
+    """ HomeView Definiton """
+    model = models.Room
+    ordering = "created"
+    paginate_by = 10
+    paginate_orphans = 5
 
-    except EmptyPage:
-        return redirect("/",)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from math import ceil
+# from datetime import datetime
+# from django.shortcuts import render, redirect
+# from django.core.paginator import Paginator, EmptyPage
+# from . import models
+
+# def all_rooms(request):
+#     page = request.GET.get("page",1)
+#     room_list = models.Room.objects.all()
+#     paginator = Paginator(room_list, 10,orphans=5)
+
+#     try:
+#         rooms = paginator.page(int(page))
+#         return render(request, "rooms/home.html", { "page": rooms,})
+
+#     except EmptyPage:
+#         return redirect("/",)
 
     
 
