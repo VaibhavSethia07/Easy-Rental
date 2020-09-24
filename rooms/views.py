@@ -1,6 +1,4 @@
-
-
-
+from django.shortcuts import render
 from django.views.generic.list import ListView
 from . import models
 
@@ -11,8 +9,11 @@ class HomeView(ListView):
     ordering = "created"
     paginate_by = 10
     paginate_orphans = 5
-
-
+    context_object_name = "rooms"
+    
+def room_detail(request, pk):
+    print(pk)
+    return render(request, "rooms/detail.html")
 
 
 
