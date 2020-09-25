@@ -1,7 +1,7 @@
 from django.db import models
-from core import models as core_models
+from django.urls import reverse
 from django_countries.fields import CountryField
-from functools import reduce
+from core import models as core_models
 
 class AbstractItem(core_models.TimeStampedModel):
 
@@ -92,6 +92,9 @@ class Room(core_models.TimeStampedModel):
             city_parts[part] = str.capitalize(city_parts[part])
         self.city = " ".join(city_parts)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("rooms:detail", kwargs={"pk": self.pk})
 
     def total_rating(self):
         all_reviews = self.reviews.all()
