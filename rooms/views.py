@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from . import models
 
@@ -13,27 +14,33 @@ class HomeView(ListView):
     paginate_by = 10
     paginate_orphans = 5
     context_object_name = "rooms"
+
+# Class based view of rooms 
+class RoomDetail(DetailView):
     
-def room_detail(request, pk):
+    """ RoomDetail Definition """
+    model = models.Room
 
-    try:
-        room = models.Room.objects.get(pk=pk)
-        return render(request, "rooms/detail.html", { "room": room, })
-    except models.Room.DoesNotExist:
-        raise Http404()
+def search(request):
 
-
-
-
-
-
+    city = request.GET.get("city")
+    city_parts = city.split(" ")
+    for part in range(len(city_parts)):
+        city_parts[part] = str.capitalize(city_parts[part])
+    city = " ".join(city_parts)
+    return render(request,"rooms/search.html", {"city":city})
 
 
 
-
-
-
-
+# Function based view of rooms
+# To use it rename room_detail.html -> detail.html   
+# def room_detail(request, pk):
+# 
+    # try:
+        # room = models.Room.objects.get(pk=pk)
+        # return render(request, "rooms/detail.html", { "room": room, })
+    # except models.Room.DoesNotExist:
+        # raise Http404()
 
 
 # from math import ceil
