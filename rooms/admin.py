@@ -21,7 +21,7 @@ class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
 
-    raw_id_fields = ("host",)
+    raw_id_fields = ("host","room_type")
 
     inlines = (PhotoInline,)
 
@@ -30,7 +30,7 @@ class RoomAdmin(admin.ModelAdmin):
         (
             "Basic Info", {
                 "fields": (
-                    "name", "description", "country","city", "address", "price",
+                    "name", "description", "country","city", "address", "price", "room_type"
                 )
             }
         ),
