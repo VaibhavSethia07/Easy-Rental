@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django_countries import countries
 
 from . import models
 
@@ -22,13 +23,15 @@ class RoomDetail(DetailView):
     model = models.Room
 
 def search(request):
-
-    city = request.GET.get("city")
+    print(request.GET)
+    city = request.GET.get("city", "Anywhere")
     city_parts = city.split(" ")
     for part in range(len(city_parts)):
         city_parts[part] = str.capitalize(city_parts[part])
     city = " ".join(city_parts)
-    return render(request,"rooms/search.html", {"city":city})
+
+    room_types = models.RoomType.objects.all()
+    return render(request,"rooms/search.html", {"city":city, "countries":countries, "room_types":room_types})
 
 
 
