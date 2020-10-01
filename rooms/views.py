@@ -32,8 +32,12 @@ def search(request):
     beds = int(request.GET.get("beds",0))
     bedrooms = int(request.GET.get("bedrooms",0))
     baths = int(request.GET.get("baths", 0))
-    s_amenities = request.GET.get("amenities")
-    s_facilities = request.GET.get("facilities")
+    instant = request.GET.get("instant", False)
+    super_host = request.GET.get("super_host", False)
+    s_amenities = request.GET.getlist("amenities")
+    s_facilities = request.GET.getlist("facilities")
+    
+    
 
     city_parts = city.split(" ")
     for part in range(len(city_parts)):
@@ -49,6 +53,10 @@ def search(request):
         "beds": beds,
         "bedrooms": bedrooms,
         "baths": baths,
+        "s_amenities" : s_amenities,
+        "s_facilities": s_facilities,
+        "instant": instant,
+        "super_host": super_host,
     }
 
     room_types = models.RoomType.objects.all()
