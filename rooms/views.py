@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.views.generic import ListView, DetailView, View
+from django.core.paginator import Paginator
 from django_countries import countries
 from . import models, forms
 
@@ -54,16 +55,16 @@ class SearchView(View):
                 if room_type is not None:
                     filter_args["room_type"] = room_type
 
-                if price != 0:
+                if price is not None:
                     filter_args["price__lte"] = price
 
-                if guests != 0:
+                if guests is not None:
                     filter_args["guests__gte"] = guests
 
-                if bedrooms != 0:
+                if bedrooms is not None:
                     filter_args["bedrooms__gte"] = bedrooms
 
-                if beds != 0:
+                if beds is not None:
                     filter_args["beds__gte"] = beds
 
                 if instant_book:
@@ -78,13 +79,21 @@ class SearchView(View):
                 for facility in facilities:
                     filter_args["facilities"] = facility
 
-                rooms = models.Room.objects.filter(**filter_args)
+                qs = models.Room.objects.filter(**filter_args).order_by("-created")
+
+                paginator = Paginator(object_list=qs, per_page=10, orphans=5)
+
+                page = request.GET.get("page", 1)
+
+                rooms = paginator.get_page(page)
+
+                return render(request, "rooms/search.html", {"form": form, "rooms": rooms})
 
         else:
 
             form =  forms.SearchForm()
 
-        return render(request, "rooms/search.html", {"form": form, "rooms": rooms})
+        return render(request, "rooms/search.html", {"form": form,})
 
 
 
