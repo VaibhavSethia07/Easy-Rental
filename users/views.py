@@ -34,6 +34,16 @@ class SignUpView(FormView):
         "email": "vaibhavsethia110@gmail.com"
     }
 
+    def form_valid(self, form):
+        form.save()
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        user = authenication(self.request, username=email, password=password)
+        if user is not None:
+            login(self.request, user)
+
+        return super().form_valid(form)
+
 
 
 
