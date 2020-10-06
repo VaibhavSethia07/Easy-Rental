@@ -41,7 +41,7 @@ class SignUpView(FormView):
         user = authenication(self.request, username=email, password=password)
         if user is not None:
             login(self.request, user)
-
+        user.verify_email()
         return super().form_valid(form)
 
 
