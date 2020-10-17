@@ -63,7 +63,12 @@ def github_login(request):
     redirect_uri = ""
     return redirect(f"https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope=read:user")
 
-def github_callback(request): 
+class GithubException(Exception):
+    pass
+
+
+def github_callback(request):
+    try:
     client_id = os.environ.get("GITHUB_ID")
     client_secret = os.environ.get("GITHUB_SECRET")
     code = request.GET.get("code", None)
@@ -75,7 +80,7 @@ def github_callback(request):
         result_json = request.json()
         error = result_json.get("error", None)
         if error is not None:
-            return redirect(reverse("users:login"))
+            raise GithubException()
         else:
             access_token = result_json.get("access_token")
             profile_request = requests.get(
@@ -91,23 +96,13 @@ def github_callback(request):
                 name = profile_json.get("name")
                 email = profiel_json.get("email")
                 bio = profile_json.get("bio")
-                models.User.objects.get(email=email)
-                if user is not None:
-                    return redirect(reverse("users:login"))
-                else:
-                    user = models.User.objects.create(
-                    username=email,
-                    first_name=first_name, 
-                    bio=bio, 
-                    email=email,
-                )
-                login(request, user)
-                return redirect(reverse("core:home"))
-            else:
-                return redirect(reverse("users:login"))
-    else:
-        return redirect(reverse("core:home"))
-
+                user = models.User.objects.get(email=email)
+                            else:
+                raise GithubException()
+        else:
+            raise GithubException()
+    except GithubException:
+        return redirect(reverse("users:login"))
 
 
 
