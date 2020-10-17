@@ -125,8 +125,6 @@ class SearchView(View):
 
 
 
-
-
     # city = request.GET.get("city", "Anywhere")
     # country = request.GET.get("country","IN")
     # room_type = int(request.GET.get("room_type", 0))
