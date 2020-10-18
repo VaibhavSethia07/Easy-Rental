@@ -55,7 +55,7 @@ class User(AbstractUser):
     currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3, blank=True, default=CURRENCY_INR)
     superhost = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
-    email_secret = models.CharField(max_length=20, default="Any text", blank=True)
+    email_secret = models.CharField(max_length=20, default="", blank=True)
     login_method = models.CharField(max_length=50, choices=LOGIN_CHOICES, default = LOGIN_EMAIL)
 
     def verify_email(self):

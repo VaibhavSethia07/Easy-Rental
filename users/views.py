@@ -5,6 +5,7 @@ from django.views.generic import FormView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
+from django.core.files.base import ContentFile
 from . import forms, models
 
 class LoginView(FormView):
@@ -98,10 +99,11 @@ def github_callback(request):
                 if username is not None:
                     name = profile_json.get("name")
                     email = profile_json.get("email")
+                    if email is None:
+                        raise GithubException() 
                     bio = profile_json.get("bio")
-                    # print(email)
+                    avatar_url = profile_json.get("avatar_url")
                     try:
-                        pass
                         user = models.User.objects.get(email=email)
                         if user.login_method != models.User.LOGIN_GITHUB:
                             raise GithubException()
@@ -112,9 +114,14 @@ def github_callback(request):
                             username=email,
                             bio=bio,
                             login_method=models.User.LOGIN_GITHUB,
+                            email_verified=True,
                         )
                         user.set_unusable_password()
                         user.save()
+                        if avatar_url is not None:
+                            photo_request = requests.get(avatar_url)
+                            user.avatar.save(f"{username}-avatar", ContentFile(photo_request.content)
+                        )
                     login(request, user)
                     return redirect(reverse("core:home"))
                 else:
