@@ -120,3 +120,7 @@ class Room(core_models.TimeStampedModel):
     def first_photo(self):
         photo, = self.photos.all()[:1]
         return photo.file.url
+
+    def count_reviews(self):
+        all_reviews = self.reviews.all()
+        return len(all_reviews)
