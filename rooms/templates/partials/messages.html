@@ -1,0 +1,9 @@
+<div>
+    {% if messages %}
+        <ul class="absolute top-0 mx-auto left-0 right-0 flex justify-center">
+            {% for message in messages %}
+            <li class="animate-messageFadeIn z-10 font-medium rounded-lg text-white py-2 px-6 text-center {% if message.tags == "success" %}bg-teal-400{% elif message.tags == "error" %}bg-red-600{% elif message.tags == "info" %}bg-blue-500{% elif message.tags == "warning" %}bg-yellow-400{% endif %}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
