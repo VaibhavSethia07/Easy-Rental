@@ -20,7 +20,7 @@
             <span class="text-lg mb-5">{{user_obj.bio}}</span>
             
             {% if user == user_obj %}
-                <a href="#" class="text-center w-48 bg-blue-400 rounded-lg py-2 font-medium text-lg text-white">Edit Profile</a>
+                <a href="{% url "users:update" %}" class="text-center w-48 bg-blue-400 rounded-lg py-2 font-medium text-lg text-white">Edit Profile</a>
             {% endif %}
         </div>
         

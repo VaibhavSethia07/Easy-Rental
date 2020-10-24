@@ -16,9 +16,12 @@
                 <img class="w-10 mr-6" src="{% static 'img/logo.png' %}"  />
             </a>
             {% block search_bar %}
-                <form method="get" action="{% url "rooms:search" %}" class="w-full">
-                    <input class="search-box search-input border px-4 py-2 text-sm font-medium w-9/12 placeholder-gray-700 focus:outline-none rounded-md shadow-md hover:shadow-lg border-blue-400 border-solid" name="city" placeholder="Where to go?">
-                </form>
+                <form method="get" action="{% url "rooms:search" %}" class="w-full flex -mt-1">
+                    <i class="fa fa-search flex px-2 mt-3 z-10"></i>
+                    <div class="w-1/4 flex absolute">
+                        <input class="search-box search-input border px-8 py-2 text-sm font-medium w-9/12 placeholder-gray-700 focus:outline-none rounded-md shadow-md hover:shadow-lg border-blue-400 border-solid" name="city" placeholder="Where to go?">
+                    </div>
+                    </form>
             {% endblock search_bar %}
         </div>
         <div>
