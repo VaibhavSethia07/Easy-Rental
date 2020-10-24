@@ -1,4 +1,4 @@
-<div class="w-full h-18 text-left border-teal-500  focus:outline-none border-2 text-gray-700 m-auto -px-1 mb-4 rounded-md font-medium text-lg {% if field.errors %}bg-red-200 border-red-600 {% endif %}">
+<div class=" focus:outline-none px-1 {% if field.errors %}bg-red-200 border-red-600 {% endif %}">
     {{field}}
     {% if field.errors %}  
         {% for error in field.errors %}
