@@ -124,3 +124,7 @@ class Room(core_models.TimeStampedModel):
     def count_reviews(self):
         all_reviews = self.reviews.all()
         return len(all_reviews)
+
+    def get_next_four_photos(self):
+        photos = self.photos.all()[1:5]
+        return photos
