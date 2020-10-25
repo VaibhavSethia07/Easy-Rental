@@ -23,13 +23,7 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <a href="{{room.host.get_absolute_url}}" class="flex flex-col items-center">
-                        {% if user_obj.avatar %}
-                            <div class="h-24 w-24 bg-cover rounded-full bg-center" style="background-image: url({{user_obj.avatar.url}});">
-                        {% else %}
-                            <div class="h-24 w-24 bg-pink-500 rounded-full font-serif text-white flex justify-center items-center overflow-hidden">
-                                <span class="text-3xl">{{room.host.first_name|first}}{{room.host.last_name|first}}</span>
-                        {% endif %}
-                            </div>
+                        {% include 'mixins/user_avatar.html' with user_obj=room.host h_and_w='w-24 h-24' text='text-3xl' %}
                         <span class="mt-2 text-gray-500">{{room.host.first_name}}</span>
                     </a>
                 </div>
@@ -64,10 +58,35 @@
                     <li class="mb-2">{{house_rule}}</li>
                 {% endfor %} 
             </div>
-            <div class="border-b border-gray-400 pb-5 mt-5">
+            <div class="mt-8">
                 <h4 class="font-medium text-2xl mb-5">Reviews</h4>
-                <div>
-                    {{room.total_rating}} {{room.reviews.count}} review{{room.reviews.count|pluralize}}
+                <div class="flex items-center">
+                    <div>
+                        <i class="fas fa-star text-teal-500"></i>
+                        <span class="font-bold text-xl">{{room.total_rating}}</span>
+                    </div>
+                    <div class="h-4 w-px bg-gray-400 mx-4"></div>
+                     <div>
+                        <span class="font-bold text-lg">{{room.reviews.count}}</span>
+                        <span>review{{room.reviews.count|pluralize}}</span>
+                    </div>
+                </div>
+                <div class="mt-10"> 
+                    {% for review in room.reviews.all %}
+                        <div class="border-b border-gray-400 pb-5 mt-5">
+                            <div class="mb-3 flex">
+                                <div>
+                                    {% include 'mixins/user_avatar.html' with user_obj=review.user h_and_w='w-10 h-10' text='text-sm' %}
+                                </div>
+                                <div class="flex flex-col ml-5">
+                                   <span class="font-medium">{{review.user.first_name}}</span>
+                                   <span class="text-sm font-medium text-gray-500">{{review.created|date:'F Y'}}</span>
+                                </div>
+                            </div>
+                            <p class="font-normal">{{review.review}}</p>
+                        </div>
+                        
+                    {% endfor %} 
                 </div>
             </div>
         </div>
