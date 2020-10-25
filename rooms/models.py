@@ -127,4 +127,28 @@ class Room(core_models.TimeStampedModel):
 
     def get_next_four_photos(self):
         photos = self.photos.all()[1:5]
-        return photos
+        return 
+        
+    def get_beds(self):
+        if self.beds == 1:
+            return "1 bed"
+        else:
+            return f"{self.beds} beds"
+
+    def get_bedrooms(self):
+        if self.bedrooms == 1:
+            return "1 bedroom"
+        else:
+            return f"{self.bedrooms} bedrooms"
+
+    def get_guests(self):
+        if self.guests == 1:
+            return "1 guest"
+        else:
+            return f"{self.guests} guests"
+
+    def get_baths(self):
+        if self.baths == 1:
+            return "1 bath"
+        else:
+            return f"{self.baths} baths"
