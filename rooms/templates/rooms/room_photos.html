@@ -19,11 +19,15 @@
                     <span class="ml-5 text-md">{{photo.caption}}</span>
                 </div>
                 <div class="flex flex-col w-1/5">
-                    <a href="#" class="text-center w-full bg-teal-400 rounded-md py-2 mb-5 font-medium text-lg text-white">Edit</a>
+                    <a href="{% url 'rooms:edit_photo' room.pk photo.pk %}" class="text-center w-full bg-teal-400 rounded-md py-2 mb-5 font-medium text-lg text-white">Edit</a>
                     <a href="{% url 'rooms:delete_photo' room.pk photo.pk %}" class="text-center w-full bg-red-500 rounded-md py-2 font-medium text-lg text-white">Delete</a>
                 </div>
             </div>
         {% endfor %}
+
+        <div class="flex justify-center">
+            <a href="{% url 'rooms:edit' room.pk %}" class="text-teal-500 font-medium text-xl">Back to edit room</a>
+        </div>
             
     </div>
 {% endblock content %}
