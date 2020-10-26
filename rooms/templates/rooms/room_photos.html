@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{room.name}}'s Photos
+{% endblock page_title %}
+
+{% block search_bar %}
+
+{% endblock search_bar %}
+
+{% block content %}
+
+    <div class="container mx-auto my-10 flex flex-col">
+        
+        {% for photo in room.photos.all %}
+            <div class="mb-5 p-6 border border-blue-500 rounded-md flex justify-between shadow-md hover:shadow-lg">
+                <div class="flex items-start">
+                    <img src="{{photo.file.url}}" alt="Room photo" class="w-40 h-40 rounded-lg" />
+                    <span class="ml-5 text-md">{{photo.caption}}</span>
+                </div>
+                <div class="flex flex-col w-1/5">
+                    <a href="#" class="text-center w-full bg-teal-400 rounded-md py-2 mb-5 font-medium text-lg text-white">Edit</a>
+                    <a href="{% url 'rooms:delete_photo' room.pk photo.pk %}" class="text-center w-full bg-red-500 rounded-md py-2 font-medium text-lg text-white">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+            
+    </div>
+{% endblock content %}
+
