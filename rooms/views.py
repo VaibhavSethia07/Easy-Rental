@@ -105,7 +105,7 @@ class EditRoomView(user_mixins.LoggedInOnlyView,SuccessMessageMixin, UpdateView)
     model = models.Room
     template_name = "rooms/room_edit.html"
     success_message = "Room updated"
-    fields = {
+    fields = (
         "name",
         "description",
         "country",
@@ -124,7 +124,7 @@ class EditRoomView(user_mixins.LoggedInOnlyView,SuccessMessageMixin, UpdateView)
         "amenities",
         "facilities",
         "house_rules"
-    }
+    )
 
     def get_object(self, queryset=None):
         room = super().get_object(queryset=queryset)
@@ -171,9 +171,7 @@ class EditPhotoView(user_mixins.LoggedInOnlyView,SuccessMessageMixin, UpdateView
 
 class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
 
-    model = models.Photo
     template_name = "rooms/photo_create.html"
-    fields = ("caption", "file",)
     form_class = forms.CreatePhotoForm
 
     def form_valid(self, form):
@@ -182,7 +180,18 @@ class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
         messages.success(self.request, "Photo uploaded")
         return redirect(reverse("rooms:photos", kwargs={"pk": pk}))
 
+class CreateRoomView(user_mixins.LoggedInOnlyView, FormView):
 
+    form_class = forms.CreateRoomForm
+    template_name = "rooms/room_create.html"
+
+    def form_valid(self, form):
+        room = form.save()
+        room.host = self.request.user
+        room.save()
+        form.save_m2m()
+        messages.success(self.request, "Room created")
+        return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))
 
 
 

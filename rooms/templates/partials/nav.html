@@ -8,7 +8,10 @@
                                    Start hosting
                             {% endif %}         
                      </a>
-              </li>       
+              </li>
+              {% if request.session.is_hosting %}
+                     <li class=" ml-8 border-b-2 border-white hover:border-blue-400 h-full flex items-center"> <a class = "px-5 py-6 " href="{% url 'rooms:create' %}">Create Room</a></li>
+              {% endif %}       
               <li class=" ml-8 border-b-2 border-white hover:border-blue-400 h-full flex items-center"> <a class = "px-5 py-6 " href="{{user.get_absolute_url}}">Profile</a></li>
               <li class=" ml-8 border-b-2 border-white hover:border-blue-400 h-full flex items-center"> <a class = "px-5 py-6 " href="{% url "users:logout" %}">Log out</a></li>
        {% else %}
