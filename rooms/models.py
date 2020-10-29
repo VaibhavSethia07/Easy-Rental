@@ -139,21 +139,21 @@ class Room(core_models.TimeStampedModel):
         this_month = now.month
         next_month = this_month + 1
         
-        if this_month == 12:
-            next_month = 1
+        # if this_month == 12:
+            # next_month = 1
 
         this_month_cal = Calendar(this_year, this_month)
-        next_month_cal = Calendar(this_year, next_month)
-        third_month = Calendar(2020, 12)
-        fourth_month = Calendar(2021, 1)
-        fifth_month = Calendar(2021, 2)
-        sixth_month = Calendar(2021, 3)
-        seventh_month = Calendar(2021, 4)
-        eighth_month = Calendar(2021, 5)
-        ninth_month = Calendar(2021, 6)
-        tenth_month = Calendar(2021, 7)
-        eleventh_month = Calendar(2021, 8)
-        twelveth_month = Calendar(2021, 9)
+        next_month_cal = Calendar(this_year, next_month%12)
+        third_month = Calendar(2020, (next_month+1)%12+1)
+        fourth_month = Calendar(2021, (next_month+2)%12+1)
+        fifth_month = Calendar(2021, (next_month+3)%12+1)
+        sixth_month = Calendar(2021, (next_month+4)%12+1)
+        seventh_month = Calendar(2021, (next_month+5)%12+1)
+        eighth_month = Calendar(2021, (next_month+6)%12+1)
+        ninth_month = Calendar(2021, (next_month+7)%12+1)
+        tenth_month = Calendar(2021, (next_month+8)%12-1)
+        eleventh_month = Calendar(2021, (next_month+9)%12-1)
+        twelveth_month = Calendar(2021, (next_month+10)%12-1)
         return [
             this_month_cal,
             next_month_cal,
