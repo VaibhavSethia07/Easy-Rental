@@ -33,13 +33,11 @@
                     </div>
                 </div>
                 <div class="py-10 px-5">
-                    
                     {% if reservation.status == 'pending' %}
-                        <a href="#" class="text-center w-full bg-red-600 rounded-md py-2 font-medium text-lg text-white block px-3 mb-5">Cancel Reservation</a>
+                        <a href="{% url 'reservations:edit' reservation.pk 'cancel' %}" class="text-center w-full bg-red-600 rounded-md py-2 font-medium text-lg text-white block px-3 mb-5">Cancel Reservation</a>
                         {% if reservation.room.host != user %}
-                            <a href="#" class="text-center w-full bg-teal-400 rounded-md py-2 font-medium text-lg text-white block px-5">Confirm Reservation</a>
-                        {% endif %}
-                                    
+                            <a href="{% url 'reservations:edit' reservation.pk 'confirm' %}" class="text-center w-full bg-teal-400 rounded-md py-2 font-medium text-lg text-white block px-5">Confirm Reservation</a>
+                        {% endif %}               
                     {% endif %}
                         
                 </div>
