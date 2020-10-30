@@ -29,7 +29,7 @@ class Calendar(calendar.Calendar):
             "July",
             "August",
             "September",
-            "Ocotober",
+            "October",
             "November",
             "December",
         )
@@ -51,4 +51,4 @@ class Calendar(calendar.Calendar):
         return days
 
     def get_month(self):
-        return self.months[self.month]
+        return self.months[self.month-1]

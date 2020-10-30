@@ -1,6 +1,8 @@
 import datetime
+from django.http import Http404
 from django.views.generic import View
 from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 from rooms import models as room_models
 from . import models
 
@@ -14,7 +16,7 @@ def create(request, room, year, month, day):
         models.BookedDay.objects.get(day=date_obj, reservation__room=room)
         raise CreateError()
     except (room_models.Room.DoesNotExist, CreateError):
-        messsage.error(request, "Can't reserve the room")
+        messages.error(request, "Can't reserve the room")
         return redirect(reverse("core:home"))
     except models.BookedDay.DoesNotExist:
         reservation = models.Reservation.objects.create(
@@ -26,7 +28,9 @@ def create(request, room, year, month, day):
         return redirect(reverse("reservations:detail", kwargs={"pk":reservation.pk}))
 
 class ReservationDetailView(View):
-    def get(self, pk):
+    def get(self, *args, **kwargs):
+        pk = kwargs.get("pk")
         reservation = models.Reservation.objects.get_or_none(pk=pk)
-        if not reservation:
-            return redirect(reverse("core:home"))
+        if not reservation or (reservation.guest != self.request.user and reservation.room.host != self.request.user):
+            raise Http404()
+        return render(self.request, "reservation/detail.html", {"reservation":reservation})
