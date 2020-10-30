@@ -9,7 +9,7 @@
 input,
 textarea,
 select {
-    @apply w-full text-left border-teal-500 border-2 text-gray-700 m-auto mb-4 rounded-md font-light text-lg h-12;
+    @apply w-full text-left border-teal-500 px-3 border-2 text-gray-700 m-auto mb-4 rounded-md font-light text-lg h-12;
     &:focus {
         @apply outline-none border-teal-500;
     }

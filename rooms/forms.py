@@ -38,6 +38,10 @@ class CreatePhotoForm(forms.ModelForm):
         photo.save()
 
 class CreateRoomForm(forms.ModelForm):
+    guests = forms.IntegerField(max_value=10, min_value=1)
+    beds = forms.IntegerField(max_value=10, min_value=1)
+    bedrooms = forms.IntegerField(max_value=10, min_value=1)
+    baths = forms.IntegerField(max_value=10, min_value=1)
     class Meta:
         model = models.Room
         fields = (

@@ -139,3 +139,5 @@ cython_debug/
 
 uploads/
 node_modules/
+
+__MACOSX/
