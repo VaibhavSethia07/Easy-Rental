@@ -32,14 +32,25 @@
                         <a href="#" class="text-teal-500 font-medium text-lg">Send a Message</a>
                     </div>
                 </div>
+                    
                 <div class="py-10 px-5">
-                    {% if reservation.status == 'pending' %}
-                        <a href="{% url 'reservations:edit' reservation.pk 'cancel' %}" class="text-center w-full bg-red-600 rounded-md py-2 font-medium text-lg text-white block px-3 mb-5">Cancel Reservation</a>
-                        {% if reservation.room.host != user %}
-                            <a href="{% url 'reservations:edit' reservation.pk 'confirm' %}" class="text-center w-full bg-teal-400 rounded-md py-2 font-medium text-lg text-white block px-5">Confirm Reservation</a>
-                        {% endif %}               
-                    {% endif %}
-                        
+                    {% if reservation.status != 'canceled' %}
+                        {% if reservation.status == 'confirmed' and reservation.is_finished %}
+                            <span class="font-medium text-2xl text-center w-full block mb-5">Write your review</span>
+                            <form action="{% url 'reviews:create' reservation.room.pk %}" method="POST" class="w-1/2 mx-auto">
+                                {% csrf_token %}
+                                {{form}}
+                                <button class="text-center w-full bg-blue-400 rounded-md py-2 font-medium text-lg text-white block mt-3">Submit Review</button>
+                            </form>
+                        {% else %}
+                            {% if reservation.status == 'pending' %}
+                                <a href="{% url 'reservations:edit' reservation.pk 'cancel' %}" class="text-center w-full bg-red-600 rounded-md py-2 font-medium text-lg text-white block px-3 mb-5">Cancel Reservation</a>
+                                {% if reservation.room.host == user%}
+                                    <a href="{% url 'reservations:edit' reservation.pk 'confirm' %}" class="text-center w-full bg-teal-400 rounded-md py-2 font-medium text-lg text-white block px-5">Confirm Reservation</a>
+                                {% endif %}               
+                            {% endif %}            
+                        {% endif %}
+                    {% endif %}           
                 </div>
             </div>
     </div>
