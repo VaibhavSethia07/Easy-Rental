@@ -97,9 +97,9 @@
                 {% if not request.session.is_hosting %}
                 {% on_favs room as on_favs_boolean %}
                 {% if on_favs_boolean %}
-                    <a href="{% url 'lists:save-room' room.pk %}"  class="text-center w-full bg-blue-400 rounded-md py-2 font-medium text-lg text-white block mb-10">Remove from Favourites</a>
+                    <a href="{% url 'lists:toggle-room' room.pk %}?action=remove"  class="text-center w-full bg-blue-400 rounded-md py-2 font-medium text-lg text-white block mb-10">Remove from Favourites</a>
                 {% else %}
-                    <a href="{% url 'lists:save-room' room.pk %}"  class="text-center w-full bg-blue-400 rounded-md py-2 font-medium text-lg text-white block mb-10">Save to Favourites</a>
+                    <a href="{% url 'lists:toggle-room' room.pk %}?action=add"  class="text-center w-full bg-blue-400 rounded-md py-2 font-medium text-lg text-white block mb-10">Save to Favourites</a>
                 {% endif %}
                     {% for calendar in room.get_calendars %}
                     <div class="mb-20">

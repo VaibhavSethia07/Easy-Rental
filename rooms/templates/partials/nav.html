@@ -11,7 +11,8 @@
               </li>
               {% if request.session.is_hosting %}
                      <li class=" ml-8 border-b-2 border-white hover:border-blue-400 h-full flex items-center"> <a class = "px-5 py-6 " href="{% url 'rooms:create' %}">Create Room</a></li>
-              {% endif %}       
+              {% endif %}
+              <li class=" ml-8 border-b-2 border-white hover:border-blue-400 h-full flex items-center"> <a class = "px-5 py-6 " href="{% url 'lists:see_favs' %}">Wishlist {% if user.lists.rooms.count != 0 %}({{user.lists.rooms.count}}){% endif %}</a></li>           
               <li class=" ml-8 border-b-2 border-white hover:border-blue-400 h-full flex items-center"> <a class = "px-5 py-6 " href="{{user.get_absolute_url}}">Profile</a></li>
               <li class=" ml-8 border-b-2 border-white hover:border-blue-400 h-full flex items-center"> <a class = "px-5 py-6 " href="{% url "users:logout" %}">Log out</a></li>
        {% else %}

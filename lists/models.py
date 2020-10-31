@@ -18,3 +18,5 @@ class List(core_models.TimeStampedModel):
         return self.rooms.count()
 
     count_rooms.short_description = "Stays"
+
+

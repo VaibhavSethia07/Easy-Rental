@@ -5,7 +5,7 @@
 {% endblock page_title %}
 
 {% block content %}
-    <div class="">
+    <div class="min-h-75vh">
         <div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center p-6 border border-blue-500 rounded-md">    
             {% include 'mixins/user_avatar.html' with user=user_obj %}
             
@@ -26,7 +26,7 @@
         
         {% if user_obj.rooms.count > 0 %}
             <div class="container mx-auto pb-10 flex flex-col items-center">
-                <h3 class="mb-12 text-2xl">{{user_obj.first_name}} {{user_obj.last_name}}'s Rooms</h3>
+                <h3 class="mb-12 text-2xl text-center">{{user_obj.first_name}} {{user_obj.last_name}}'s Rooms</h3>
                 <div class="container w-10/12 items-center">
                     <div class="-mx-40 flex flex-wrap mb-10">
                         {% for room in user_obj.rooms.all %}
