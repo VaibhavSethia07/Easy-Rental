@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 18:04+0530\n"
+"POT-Creation-Date: 2020-10-30 21:16+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,11 @@ msgstr ""
 msgid "Where to go?"
 msgstr "¿Dónde ir?"
 
-#: rooms/templates/partials/footer.html:3
+#: rooms/templates/partials/footer.html:4
 msgid "All rights reserved"
 msgstr "Todos los derechos reservados"
+
+#: rooms/templates/rooms/room_list.html:23
+#, python-format
+msgid "%(current_page)s of %(total_pages)s"
+msgstr "%(current_page)s de %(total_pages)s"
