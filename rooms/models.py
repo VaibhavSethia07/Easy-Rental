@@ -142,7 +142,7 @@ class Room(core_models.TimeStampedModel):
 
         month_list_cal = []
 
-        for i in range(0, 12):
+        for i in range(0, 3):
             month_list_cal.append(Calendar(this_year, (this_month + i-1) % 12+1))
             
             if ((this_month + i) % 12 == 0):

@@ -91,6 +91,11 @@
                 </div>
             </div>
         </div>
+        <div class="absolute -mt-32 mr-16 -py-12 right-0 px-2">
+                <i class="fas fa-star text-yellow-500"></i>
+                <span class="font-bold text-2xl text-black">{{room.total_rating}}</span>
+        </div>
+            
         <div class="w-1/4">
             {% if room.host == user %}
                 <a href="{% url 'rooms:edit' room.pk %}" class="text-center w-full bg-blue-400 rounded-md py-2 font-medium text-lg text-white block">Edit Room</a>
