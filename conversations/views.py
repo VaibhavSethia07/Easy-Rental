@@ -30,12 +30,11 @@ class ConversationDetailView(View):
         
     def post(self, *args, **kwargs):
         message = self.request.POST.get("message", None)
-        print(self.request.POST)
         pk = kwargs.get("pk")
         conversation = models.Conversation.objects.get_or_none(pk=pk)
         if not conversation:
             raise Http404()
-        print( )
+
         if message is not None:
             models.Message.objects.create(
                 message=message,

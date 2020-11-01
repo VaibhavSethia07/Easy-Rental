@@ -220,6 +220,12 @@ def switch_language(request):
         request.session[translation.LANGUAGE_SESSION_KEY] = lang
     return HttpResponse(status=200)
 
+def privacy_policy(request):
+    return render(request, "users/privacy_policy.html")
+
+def terms_conditions(request):
+    return render(request, "users/terms_conditions.html")
+
 # class LoginView(View): 
     # def get(self, request):
         # form = forms.LoginForm(initial={"email": "vaibhavsethia110@gmail.com"})

@@ -1,7 +1,11 @@
 {% load i18n %}
 <footer class="container m-auto text-center py-10 border-t font-medium text-gray-500">
     <div class="flex flex-col ">
-        <span>&copy; 2020 Easy Rental, Inc. {% trans 'All rights reserved' %}</span>
+        <span class="inline-block">&copy; 2020 Easy Rental, Inc. {% trans 'All rights reserved' %}</span>
+        <div class="mt-4 text-center">
+            <a href="{% url 'users:privacy_policy' %}" class="mr-3"><span>Privacy Policy</span></a>    
+            <a href="{% url 'users:terms_conditions' %}"><span>Terms & Conditions</span></a>
+        </div>
     </div>
     <div class="flex mt-10">
         {% get_current_language as LANGUAGE_CODE %}
