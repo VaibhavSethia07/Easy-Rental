@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 flake8 = "*"
+pipenv-to-requirements = "*"
 
 [packages]
 django = "==2.2.5"
