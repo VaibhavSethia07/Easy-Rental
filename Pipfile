@@ -5,7 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 flake8 = "*"
-awsebcli = "*"
 
 [packages]
 django = "==2.2.5"
@@ -15,8 +14,9 @@ django-seed = "*"
 faker = "*"
 django-dotenv = "*"
 requests = "*"
-awsebcli = "*"
 pipenv-to-requirements = "*"
+awscli = "*"
+awsebcli = "*"
 
 [requires]
 python_version = "3.7"
