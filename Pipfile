@@ -17,7 +17,6 @@ django-dotenv = "*"
 requests = "*"
 pipenv-to-requirements = "*"
 awscli = "*"
-awsebcli = "*"
 
 [requires]
 python_version = "3.7"
