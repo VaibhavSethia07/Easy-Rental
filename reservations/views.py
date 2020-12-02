@@ -24,7 +24,7 @@ def create(request, room, year, month, day):
             guest=request.user,
             room=room,
             check_in=date_obj,
-            check_out=date_obj + datetime.timedelta(days=60),
+            check_out=date_obj + datetime.timedelta(days=1),
         )
         return redirect(reverse("reservations:detail", kwargs={"pk":reservation.pk}))
 
