@@ -148,35 +148,5 @@ class Room(core_models.TimeStampedModel):
             if ((this_month + i) % 12 == 0):
                 this_year+=1
 
-        
-        # if this_month == 12:
-            # next_month = 1
-        # this_month_cal = Calendar(this_year, this_month)
-        # next_month_cal = Calendar(this_year, next_month%12)
-        # third_month = Calendar(this_year+1, (next_month+1)%12+1)
-        # fourth_month = Calendar(this_year+1, (next_month+2)%12+1)
-        # fifth_month = Calendar(this_year+1, (next_month+3)%12+1)
-        # sixth_month = Calendar(this_year+1, (next_month+4)%12+1)
-        # seventh_month = Calendar(this_year+1, (next_month+5)%12+1)
-        # eighth_month = Calendar(this_year+1, (next_month+6)%12+1)
-        # ninth_month = Calendar(this_year+1, (next_month+7)%12+1)
-        # tenth_month = Calendar(this_year+1, (next_month+8)%12-1)
-        # eleventh_month = Calendar(this_year+1, (next_month+9)%12-1)
-        # twelveth_month = Calendar(this_year+1, (next_month+10)%12-1)
-        # return [
-            # this_month_cal,
-            # next_month_cal,
-            # third_month,
-            # fourth_month,
-            # fifth_month,
-            # sixth_month,
-            # seventh_month,
-            # eighth_month,
-            # ninth_month,
-            # tenth_month,
-            # eleventh_month,
-            # twelveth_month,
-        # ]
-
         return month_list_cal
 
